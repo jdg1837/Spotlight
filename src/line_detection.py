@@ -43,5 +43,5 @@ def detect_lines(filename):
     # Draw the lines on the  image
     lines_edges = cv2.addWeighted(img, 0.8, line_overlay, 1, 0)
 
-    return imgOutput
     cv2.imwrite(imgOutput, line_image)
+    return imgOutput
