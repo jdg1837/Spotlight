@@ -4,47 +4,44 @@
 import cv2
 import numpy as np
 
-# Get gray image
-imgInput = '../images/parkinglot.jpg'
-imgOutput = '../images/outputlot.png'
-img = cv2.imread(imgInput)
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-# Process gray image with GaussianBlur
-kernal_size = 5
-blur_gray = cv2.GaussianBlur(gray, (kernal_size, kernal_size), 0)
+def detect_lines(filename):
 
-# Process edge detection using Canny
-low_threshold = 50
-high_threshold = 150
-edges = cv2.Canny(blur_gray, low_threshold, high_threshold)
+    # Get gray image
+    imgInput = filename
+    imgOutput = '../images/outputlot.png'
+    img = cv2.imread(imgInput)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-# Get lines with HoughLinesP
-rho = 1  # distance resolution in pixels of the Hough grid
-theta = np.pi / 180  # angular resolution in radians of the Hough grid
-threshold = 15  # minimum number of votes (intersections in Hough grid cell)
-min_line_length = 50  # minimum number of pixels making up a line
-max_line_gap = 150  # maximum gap in pixels between connectable line segments
-line_image = np.copy(img) * 0  # creating a blank to draw lines on
-line_overlay = np.copy(img)
+    # Process gray image with GaussianBlur
+    kernal_size = 5
+    blur_gray = cv2.GaussianBlur(gray, (kernal_size, kernal_size), 0)
 
-# Run Hough on edge detected image
-# Output "lines" is an array containing endpoints of detected line segments
-lines = cv2.HoughLinesP(edges, rho, theta, threshold, np.array([]),
-                        min_line_length, max_line_gap)
+    # Process edge detection using Canny
+    low_threshold = 50
+    high_threshold = 150
+    edges = cv2.Canny(blur_gray, low_threshold, high_threshold)
 
-for line in lines:
-    for x1, y1, x2, y2 in line:
-        print(x1, y1, x2, y2)
-        cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 5)
+    # Get lines with HoughLinesP
+    rho = 1  # distance resolution in pixels of the Hough grid
+    theta = np.pi / 180  # angular resolution in radians of the Hough grid
+    threshold = 15  # minimum number of votes (intersections in Hough grid cell)
+    min_line_length = 50  # minimum number of pixels making up a line
+    max_line_gap = 150  # maximum gap in pixels between connectable line segments
+    line_image = np.copy(img) * 0  # creating a blank to draw lines on
+    line_overlay = np.copy(img)
 
-# Draw the lines on the  image
-lines_edges = cv2.addWeighted(img, 0.8, line_overlay, 1, 0)
+    # Run Hough on edge detected image
+    # Output "lines" is an array containing endpoints of detected line segments
+    lines = cv2.HoughLinesP(edges, rho, theta, threshold, np.array([]),
+                            min_line_length, max_line_gap)
 
-cv2.imshow("one", img)
-cv2.imshow("two", line_image)
-cv2.imshow("three", line_overlay)
-img += line_image
-cv2.imshow("four", img)
+    for line in lines:
+        for x1, y1, x2, y2 in line:
+            cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 5)
 
-cv2.imwrite(imgOutput, line_image)
+    # Draw the lines on the  image
+    lines_edges = cv2.addWeighted(img, 0.8, line_overlay, 1, 0)
+
+    return imgOutput
+    cv2.imwrite(imgOutput, line_image)
