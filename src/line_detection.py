@@ -5,8 +5,8 @@ import cv2
 import numpy as np
 
 # Get gray image
-imgInput = 'test_grid.png'
-imgOutput = 'test_grid_lines.png'
+imgInput = '../images/test_grid.png'
+imgOutput = '../images/test_grid_lines.png'
 img = cv2.imread(imgInput)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
