@@ -9,7 +9,7 @@ def detect_blobs(filename):
     # Read image
     im = cv2.imread(filename)
 
-    # Setup SimpleBlobDetector parameters.
+    # Setup  parameters.
     params = cv2.SimpleBlobDetector_Params()
 
     # Change thresholds
@@ -20,14 +20,12 @@ def detect_blobs(filename):
     # Filter by Area.
     params.filterByArea = True
     params.minArea = 2500
-    #200
+
     # Filter by Circularity
     params.filterByCircularity = False
-    params.minCircularity = 0.1
 
     # Filter by Convexity
     params.filterByConvexity = False
-    params.minConvexity = 0.87
 
     # Filter by Inertia
     params.filterByInertia = True
@@ -35,7 +33,6 @@ def detect_blobs(filename):
 
     # Create a detector with the parameters
     detector = cv2.SimpleBlobDetector(params)
-
 
     # Detect blobs.
     keypoints = detector.detect(im)
