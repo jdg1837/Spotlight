@@ -49,5 +49,3 @@ def detect_blobs(filename):
     # Show blobs
     cv2.imshow("Keypoints", im_with_keypoints)
     cv2.waitKey(0)
-
-detect_blobs(ld.detect_lines('../images/parkinglot.png'))
