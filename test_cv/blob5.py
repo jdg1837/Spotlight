@@ -5,7 +5,7 @@ import cv2
 import numpy as np;
 
 # Read image
-im = cv2.imread("cars8.jpg")
+im = cv2.imread("car10.jpg")
 
 # Setup SimpleBlobDetector parameters.
 params = cv2.SimpleBlobDetector_Params()
@@ -17,7 +17,7 @@ params.maxThreshold = 255
 
 # Filter by Area.
 params.filterByArea = True
-params.minArea = 2000
+params.minArea = 2500
 #200
 # Filter by Circularity
 params.filterByCircularity = False
