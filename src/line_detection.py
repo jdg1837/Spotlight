@@ -28,7 +28,7 @@ def detect_lines(filename):
     threshold = 15  # minimum number of votes (intersections in Hough grid cell)
     min_line_length = 50  # minimum number of pixels making up a line
     max_line_gap = 150  # maximum gap in pixels between connectable line segments
-    line_image = np.copy(img)   # creating a blank to draw lines on
+    line_image = np.copy(img)  # creating a blank to draw lines on
     line_overlay = np.copy(img)
 
     # Run Hough on edge detected image
