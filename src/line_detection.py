@@ -5,8 +5,8 @@ import cv2
 import numpy as np
 
 # Get gray image
-imgInput = '../images/test_grid.png'
-imgOutput = '../images/test_grid_lines.png'
+imgInput = '../images/parkinglot.jpg'
+imgOutput = '../images/outputlot.png'
 img = cv2.imread(imgInput)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -24,7 +24,7 @@ rho = 1  # distance resolution in pixels of the Hough grid
 theta = np.pi / 180  # angular resolution in radians of the Hough grid
 threshold = 15  # minimum number of votes (intersections in Hough grid cell)
 min_line_length = 50  # minimum number of pixels making up a line
-max_line_gap = 20  # maximum gap in pixels between connectable line segments
+max_line_gap = 150  # maximum gap in pixels between connectable line segments
 line_image = np.copy(img) * 0  # creating a blank to draw lines on
 
 # Run Hough on edge detected image
@@ -34,6 +34,7 @@ lines = cv2.HoughLinesP(edges, rho, theta, threshold, np.array([]),
 
 for line in lines:
     for x1, y1, x2, y2 in line:
+        print(x1, y1, x2, y2)
         cv2.line(line_image, (x1, y1), (x2, y2), (255, 0, 0), 5)
 
 # Draw the lines on the  image
