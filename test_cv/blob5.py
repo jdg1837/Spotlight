@@ -5,7 +5,7 @@ import cv2
 import numpy as np;
 
 # Read image
-im = cv2.imread("car8.jpg")
+im = cv2.imread("cars8.jpg")
 
 # Setup SimpleBlobDetector parameters.
 params = cv2.SimpleBlobDetector_Params()
