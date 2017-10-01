@@ -9,7 +9,7 @@ def detect_lines(filename):
 
     # Get gray image
     imgInput = filename
-    imgOutput = '../images/outputlot.png'
+    imgOutput = '../images/' + filename.replace('.png', '') + '_lines.png'
     img = cv2.imread(imgInput)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -28,7 +28,7 @@ def detect_lines(filename):
     threshold = 15  # minimum number of votes (intersections in Hough grid cell)
     min_line_length = 50  # minimum number of pixels making up a line
     max_line_gap = 150  # maximum gap in pixels between connectable line segments
-    line_image = np.copy(img) * 0  # creating a blank to draw lines on
+    line_image = np.copy(img)   # creating a blank to draw lines on
     line_overlay = np.copy(img)
 
     # Run Hough on edge detected image
@@ -44,4 +44,5 @@ def detect_lines(filename):
     lines_edges = cv2.addWeighted(img, 0.8, line_overlay, 1, 0)
 
     cv2.imwrite(imgOutput, line_image)
+
     return imgOutput
